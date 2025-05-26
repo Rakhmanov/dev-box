@@ -1,7 +1,3 @@
-Here's a cleaned-up and professional version of your README:
-
----
-
 # 🛠️ Dev Environment Setup – Ubuntu 24.04+ (Tested on WSL2)
 
 This scaffolds a clean developer environment using `just` and provides steps to create a new WSL profile based on Ubuntu 24.04.
@@ -13,7 +9,7 @@ This scaffolds a clean developer environment using `just` and provides steps to 
 ### Install `just` task runner
 
 ```bash
-sudo apt install just
+sudo apt install --update just
 ```
 
 ---
@@ -21,9 +17,14 @@ sudo apt install just
 ## 🚀 Usage
 
 ### Bootstrap your dev environment
+just bootstrap "Full Name" "email@example.com"
+Running bootstrap requires providing 2 parameter, which will be used to configure git.
+
+1) Full Name
+2) E-mail
 
 ```bash
-just bootstrap --name "Denis Shatilov" --email "shatilov18@gmail.com"
+just bootstrap "Denis Shatilov" "shatilov18@gmail.com"
 ```
 
 ### Install tools only
@@ -34,7 +35,7 @@ just install_tools
 
 ---
 
-## 🐧 Create a New WSL Profile (Ubuntu 24.04)
+## Set Up WSL
 
 ### 1. Download the Ubuntu 24.04 Image
 
@@ -54,29 +55,21 @@ wsl --export Ubuntu-24.04 ubuntu-24.04-empty.tar
 wsl --import dev-box C:\WSL\dev-box ubuntu-24.04-empty.tar
 ```
 
----
-
-## 👤 Set Up User in WSL
 
 ### 4. Create a User (inside the WSL instance)
 
 ```bash
-adduser admin
-usermod -aG sudo admin
+USERNAME=admin
+useradd -m -s /bin/bash -g admin $USERNAME
+echo "$USERNAME:password" | chpasswd
+usermod -aG sudo $USERNAME
+echo -e "[user]\ndefault=admin" | tee /etc/wsl.conf
+su admin
+cd /mnt/c/Projects/dev-os
 ```
 
-### 5. Set Default User
-
-```bash
-echo -e "[user]\ndefault=admin" | sudo tee /etc/wsl.conf
-```
-
-### 6. (Optional) Set Default Distro via PowerShell
+### 5. (Optional) Set Default Distro via PowerShell
 
 ```powershell
 wsl --set-default dev-box
 ```
-
----
-
-Let me know if you want to include Dotfiles, Docker, or package managers like `asdf` or `brew` in the bootstrap.

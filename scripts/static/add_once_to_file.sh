@@ -1,0 +1,18 @@
+# Usage: add_once_to_file "grep_query" "block_to_add" [file]
+add_once_to_file() {
+  local marker="$1"      # e.g. "asdf shims path"
+  local block="$2"
+  local file="${3:-$HOME/.path_additions}"
+
+  local start_marker="# >>> $marker"
+  local end_marker="# <<< $marker"
+
+  # If marker is not found, append block with markers
+  if ! grep -Fq "$start_marker" "$file" 2>/dev/null; then
+    {
+      echo "$start_marker"
+      echo "$block"
+      echo "$end_marker"
+    } >> "$file"
+  fi
+}
