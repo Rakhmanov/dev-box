@@ -1,8 +1,30 @@
-# 🛠️ Dev Environment Setup – Ubuntu 24.04+ (Tested on WSL2)
+# 🛠️ Ubuntu 24.04+ Dev Environment Setup (Tested on WSL2)
 
 This scaffolds a clean developer environment using `just` and provides steps to create a new WSL profile based on Ubuntu 24.04.
 
 ---
+
+Includes:
+
+    - zsh
+        - build-essential, yq, jq, git, fzf, curl, wget, unzip
+    - oh-my-zsh
+    - golang
+    - asdf (items below installed by asdf:)
+    - kubectl
+        - krew
+        - kubectl-ns
+        - kubectl-ctx
+        - node-shell
+    - helm
+    - kustomize
+    - terraform
+    - terragrunt
+    - python
+    - nodejs
+    - awscli
+    - task
+
 
 ## 📦 Prerequisites
 

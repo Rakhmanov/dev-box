@@ -17,7 +17,7 @@ bootstrap name="" email="":
 apt_inits:
     sudo apt update && sudo apt upgrade -y
     sudo apt install -y git curl wget unzip build-essential \
-    zsh fonts-powerline fzf yq jq ripgrep fd-find \
+    zsh fonts-powerline fontawesome fzf yq jq ripgrep fd-find \
     libssl-dev zlib1g-dev libbz2-dev libreadline-dev \
     libsqlite3-dev llvm libncurses5-dev libncursesw5-dev \
     xz-utils tk-dev libffi-dev liblzma-dev 

@@ -33,12 +33,13 @@ kubectl krew install ctx
 kubectl krew install node-shell
 
 # Kubectx kubens autocomplete
-git clone https://github.com/ahmetb/kubectx /tmp/kubectx
+git clone --depth 1 https://github.com/ahmetb/kubectx /tmp/kubectx
+mkdir -p ~/.oh-my-zsh/custom/completions
 mv /tmp/kubectx/completion/_kubectx.zsh ~/.oh-my-zsh/custom/completions/_kubectx.zsh || true
 mv /tmp/kubectx/completion/_kubens.zsh ~/.oh-my-zsh/custom/completions/_kubens.zsh || true
 rm -rf /tmp/kubectx
 
-
+# Add custom completions to the Path
 MARKER='$ZSH/custom/completions'
 BLOCK=$(cat <<'EOF'
 fpath=($ZSH/custom/completions $fpath)
