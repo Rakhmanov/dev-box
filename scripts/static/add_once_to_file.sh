@@ -7,8 +7,11 @@ add_once_to_file() {
   local start_marker="# >>> $marker"
   local end_marker="# <<< $marker"
 
+  mkdir -p "$(dirname "$file")"
+  touch "$file"
+
   # If marker is not found, append block with markers
-  if ! grep -Fq "$start_marker" "$file" 2>/dev/null; then
+  if ! grep -Fq "$start_marker" "$file"; then
     {
       echo "$start_marker"
       echo "$block"

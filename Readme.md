@@ -38,6 +38,12 @@ sudo apt install --update just
 
 ## 🚀 Usage
 
+### Checkout
+```bash
+git clone --depth=1 https://github.com/Rakhmanov/dev-box.git
+cd dev-box
+```
+
 ### Bootstrap your dev environment
 just bootstrap "Full Name" "email@example.com"
 Running bootstrap requires providing 2 parameter, which will be used to configure git.
@@ -66,19 +72,24 @@ wget https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-
 ```
 
 ### 2. Export an Existing Image (Optional)
+Keep in mind the format is tar and it's not compressed.
 
 ```powershell
-wsl --export Ubuntu-24.04 ubuntu-24.04-empty.tar
+wsl --export Ubuntu-24.04 existing-ubuntu-24.04.tar
 ```
 
 ### 3. Import the Image
 
 ```powershell
-wsl --import dev-box C:\WSL\dev-box ubuntu-24.04-empty.tar
+wsl --import dev-box C:\WSL\dev-box ubuntu-24.04.tar.xz
 ```
 
+### 4. Load image
+```powershell
+wsl -d dev-box
+```
 
-### 4. Create a User (inside the WSL instance)
+### 5. Create a User (inside the WSL instance)
 
 ```bash
 USERNAME=admin
@@ -86,11 +97,19 @@ useradd -m -s /bin/bash -g admin $USERNAME
 echo "$USERNAME:password" | chpasswd
 usermod -aG sudo $USERNAME
 echo -e "[user]\ndefault=admin" | tee /etc/wsl.conf
-su admin
-cd /mnt/c/Projects/dev-os
 ```
 
-### 5. (Optional) Set Default Distro via PowerShell
+### 6. Shutdown so /etc/wsl.conf changes woule be re-read.
+```powershell
+wsl.exe --shutdown
+```
+
+### 7. Turn on the WSL distribution
+```powershell
+wsl -d dev-box
+```
+
+### 8. (Optional) Set Default Distro via PowerShell
 
 ```powershell
 wsl --set-default dev-box
